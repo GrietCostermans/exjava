@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ExB1 { 
+public class ExB2 { 
         
         public static void main(String[] args) {
 
@@ -27,11 +27,23 @@ public class ExB1 {
         System.out.println("Knowl: " + priorKnowledge);
         System.out.println("#instructors: " + instructorNames.size());
 
+        double totalPrice = 0;
 
-        if ((days > 3) & (priorKnowledge == true)) {
-            System.out.println("Total Price is without VAT: " + (days * price));
+        if ((days > 3) && (priorKnowledge == true)) {
+            totalPrice = days * price;
+            System.out.println("Total Price is without VAT: " + totalPrice);
         } else {
-            System.out.println("Total Price with VAT: " + (days * price * 1.21));    
+            totalPrice = days * price * 1.21;
+            System.out.println("Total Price with VAT: " + totalPrice);    
         }
+
+        if (totalPrice < 500) {
+            System.out.println(totalPrice + " = CHEAP < 500");
+        } else if ((totalPrice > 499) && (totalPrice < 1501 )) {
+            System.out.println(totalPrice + " = OK betw 500-1500");
+        } else {
+            System.out.println(totalPrice + " = EXPENSIVE > 1500");
+        }
+
     }
 }
