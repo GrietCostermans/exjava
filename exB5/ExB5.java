@@ -12,9 +12,9 @@ public class ExB5 {
         do {
             System.out.println("Welkom!" );
             System.out.println("Nog eens welkom zeggen? J/N" );
-            choosenWelkom = readInput.nextLine();//.toUpperCase();
-            System.out.println(choosenWelkom);
-        } while (choosenWelkom == "J");
+            choosenWelkom = readInput.nextLine().toUpperCase();
+            //System.out.println(choosenWelkom);
+        } while (choosenWelkom.equals("J"));
     }
 
 }
