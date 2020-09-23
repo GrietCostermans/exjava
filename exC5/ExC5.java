@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ExC2 { 
+public class ExC5 { 
         
         public static void main(String[] args) {
 
@@ -10,19 +10,33 @@ public class ExC2 {
         
         System.out.println("Please Input Title: " );
         String title = readInput.nextLine();
-        System.out.println("Please Input Days: " );
-        int days = Integer.parseInt(readInput.nextLine());
-        System.out.println("Please Input Price: " );
-        double price = Double.parseDouble(readInput.nextLine()) ;
-        System.out.println("Please Input KnowLedge: " );
-        boolean priorKnowledge = Boolean.parseBoolean(readInput.nextLine());
+        int days=0;
+        double price=0;
+        boolean priorKnowledge=false;
+
+        try {
+               
+            System.out.println("Please Input Days: " );
+            days = Integer.parseInt(readInput.nextLine());
+            System.out.println("Please Input Price: " );
+            price = Double.parseDouble(readInput.nextLine()) ;
+            System.out.println("Please Input KnowLedge: " );
+            priorKnowledge = Boolean.parseBoolean(readInput.nextLine());
+
+        } catch (NumberFormatException e) {
+                System.out.println("U hebt u kans verkeken - bye" );
+                System.exit(-1);
+        }
 
         ArrayList<String> instructorNames = new ArrayList<String>();
         instructorNames.add("Sandy");
         instructorNames.add("Candy");
         instructorNames.add("Mandy");
 
-        double totalPrice = totalPrice(days,price,priorKnowledge);
+        double totalPrice = 0;
+
+        totalPrice = totalPrice(days,price,priorKnowledge);
+        
         printInfo(title, days, price, priorKnowledge,totalPrice);
     }
 
@@ -45,9 +59,11 @@ public class ExC2 {
 
     public static double totalPrice(int totalDays, double totalPriceDay, boolean totalPriorKnowledge ) {
         double totalPriceReturn = totalDays * totalPriceDay; 
+
         if (!(totalDays > 3) && (totalPriorKnowledge)) {
             totalPriceReturn*=1.21;
         }
+
         return totalPriceReturn;
     }
     
