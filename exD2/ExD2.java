@@ -70,7 +70,7 @@ public class ExD2 {
 
         try {
           // Creates a FileWriter
-        FileWriter file = new FileWriter("outputExD2.txt");
+        FileWriter file = new FileWriter("courseinfo.txt");
 
         // Creates a BufferedWriter
         BufferedWriter output = new BufferedWriter(file);
