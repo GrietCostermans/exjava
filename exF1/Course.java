@@ -1,8 +1,13 @@
+import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+
 public class Course {         
     private String courseTitle;
     private int courseDays;
     private double courseDayPrice;
     private boolean coursePriorKnowledge;
+    private ArrayList<String> instructors = new ArrayList<String>();
 
     
     // insert van het course-object
@@ -46,16 +51,52 @@ public class Course {
         this.coursePriorKnowledge = coursePriorKnowledge;
     }
 
+    public void addInstructor(String instructorName) {
+        this.instructors.add(instructorName);
+    }
+
+ 
     public void printCourseData() {
+        double printTotalPrice=0;
+        printTotalPrice = calculateTotalPrice();
         System.out.println("============COURSE-DATA===========");
-        System.out.println("Title : " + getCourseTitle());
-        System.out.println("#Days : " + getCourseDays());
-        System.out.println("Price/Day : " + getCourseDayPrice());
-        System.out.println("Prior Know: " + getCoursePriorKnowledge());
+        System.out.println("Title : " + courseTitle);
+        System.out.println("#Days : " + courseDays);
+        System.out.println("Price/Day : " + courseDayPrice);
+        System.out.println("Prior Know: " + coursePriorKnowledge);
+        System.out.println("Total Price: " + printTotalPrice + " EUR");
+        if (printTotalPrice < 500) {
+            System.out.println("Wow this is CHEAP < 500");
+        } else if ((printTotalPrice > 499) && (printTotalPrice < 1501 )) {
+            System.out.println("OK between 500-1500");
+        } else {
+            System.out.println("OMG so EXPENSIVE > 1500");
+        }
+        System.out.println("Assigned instructors: ");
+        for (int i=0;i<this.instructors.size();i++) {
+            System.out.println(this.instructors.get(i));
+        }
     }
 
     public double calculateTotalPrice() {
-        return this.courseDays*this.courseDayPrice;
+        double totalPriceReturn = courseDays * courseDayPrice;
+        if (!(courseDays > 3) && (coursePriorKnowledge)) {
+            totalPriceReturn*=1.21;
+        }
+        return totalPriceReturn;
     }
 
+    public void createTextFileWithCourseData() {
+        String data = courseTitle+ ";" + courseDays + ";" + courseDayPrice + ";" + coursePriorKnowledge + ";" + calculateTotalPrice()  ;
+
+        try {
+            FileWriter file = new FileWriter("courseinfo.txt");
+            BufferedWriter output = new BufferedWriter(file);
+            output.write(data);
+            output.close();
+            }
+
+        catch (Exception e) {
+            e.getStackTrace(); }
+    }
 }    
